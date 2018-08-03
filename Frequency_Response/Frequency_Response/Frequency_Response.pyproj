@@ -5,8 +5,7 @@
     <ProjectGuid>c79e9f00-6105-45d3-8e03-c71064fc8eb1</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>Frequency_Response.py</StartupFile>
-    <SearchPath>
-    </SearchPath>
+    <SearchPath>..\..\..\Common;..\..\..\Plotting</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>Frequency_Response</Name>
