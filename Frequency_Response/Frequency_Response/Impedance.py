@@ -113,8 +113,8 @@ class resistor(impedance):
 class capacitor(impedance):
 
     # class for defining a capacitor object
-    # resistor is derived from base class impedance
-    # resistor contains private member __capacitance
+    # capacitor is derived from base class impedance
+    # capacitor contains private member __capacitance
 
     def __init__(self, cval, vscl, fval, fscl):
         self.FUNC_NAME = ".capacitor(impedance)" # use this in exception handling messages
@@ -139,6 +139,38 @@ class capacitor(impedance):
                 self.__capacitance = 1.0 / denom
             else:
                 self.__capacitance = complex(0.0, 0.0)
+                raise Exception
+        except Exception:
+            print(self.ERR_STATEMENT)
+
+class inductor(impedance):
+
+    # class for defining an inductor object
+    # inductor is derived from base class impedance
+    # inductor contains private member __inductance
+
+    def __init__(self, cval, vscl, fval, fscl):
+        self.FUNC_NAME = ".inductor(impedance)" # use this in exception handling messages
+        
+        self.ERR_STATEMENT = "Error: " + MOD_NAME_STR + self.FUNC_NAME  
+        
+        impedance.__init__(self)
+        
+        self.set_L(cval, vscl, fval, fscl)
+
+    # public getter
+    def get_L(self):
+        return self.__inductance
+
+    # public setter
+    def set_L(self, value, vscl, freq, fscl):
+        try:
+            self.set_vscale(vscl)
+            self.set_f(freq, fscl)
+            if value >= 0.0 and self.get_w() > 0.0:                
+                self.__inductance = complex(0.0, self.get_w() * value * self.get_vscale())
+            else:
+                self.__inductance = complex(0.0, 0.0)
                 raise Exception
         except Exception:
             print(self.ERR_STATEMENT)

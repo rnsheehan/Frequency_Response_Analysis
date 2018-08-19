@@ -64,4 +64,8 @@ if __name__ == '__main__':
 
     print(C.get_C())
 
+    L = Impedance.inductor(90, Common.SI_Prefices["nano"], 62, Common.SI_Prefices["Mega"])
+
+    print(L.get_L())
+
     
