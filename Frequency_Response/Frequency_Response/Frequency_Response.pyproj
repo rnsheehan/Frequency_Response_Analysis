@@ -21,6 +21,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Frequency_Response.py" />
+    <Compile Include="Impedance.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
