@@ -20,6 +20,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Circuit_Models.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Frequency_Response.py" />
     <Compile Include="Impedance.py">
       <SubType>Code</SubType>

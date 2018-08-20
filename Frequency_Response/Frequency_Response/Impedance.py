@@ -123,22 +123,39 @@ class capacitor(impedance):
         
         impedance.__init__(self)
         
-        self.set_C(cval, vscl, fval, fscl)
+        self.set_C(cval, vscl)
+
+        self.set_ZC(cval, vscl, fval, fscl)
 
     # public getter
     def get_C(self):
         return self.__capacitance
 
+    def get_ZC(self):
+        return self.__ZC
+
     # public setter
-    def set_C(self, value, vscl, freq, fscl):
+    def set_C(self, value, vscl):
+        # set the value of the lumped element capacitance
         try:
             self.set_vscale(vscl)
+            if value >= 0.0:
+                self.__capacitance = value * self.get_vscale()
+            else:
+                self.__capacitance = 0.0
+                raise Exception
+        except Exception:
+            print(self.ERR_STATEMENT)
+
+    def set_ZC(self, value, vscl, freq, fscl):
+        # set the value of the lumped element capacitance complex impedance
+        try:
             self.set_f(freq, fscl)
             if value >= 0.0 and self.get_w() > 0.0:
                 denom = complex(0.0, self.get_w() * value * self.get_vscale())
-                self.__capacitance = 1.0 / denom
+                self.__ZC = 1.0 / denom
             else:
-                self.__capacitance = complex(0.0, 0.0)
+                self.__ZC = complex(0.0, 0.0)
                 raise Exception
         except Exception:
             print(self.ERR_STATEMENT)
@@ -149,28 +166,46 @@ class inductor(impedance):
     # inductor is derived from base class impedance
     # inductor contains private member __inductance
 
-    def __init__(self, cval, vscl, fval, fscl):
+    def __init__(self, ival, vscl, fval, fscl):
         self.FUNC_NAME = ".inductor(impedance)" # use this in exception handling messages
         
         self.ERR_STATEMENT = "Error: " + MOD_NAME_STR + self.FUNC_NAME  
         
         impedance.__init__(self)
         
-        self.set_L(cval, vscl, fval, fscl)
+        self.set_L(ival, vscl)
+
+        self.set_ZL(ival, vscl, fval, fscl)
 
     # public getter
     def get_L(self):
         return self.__inductance
 
+    def get_ZL(self):
+        return self.__ZL
+
     # public setter
-    def set_L(self, value, vscl, freq, fscl):
+    def set_L(self, value, vscl):
+        # set the value of the lumped element inductor
+        try:
+            self.set_vscale(vscl)
+            if value >= 0.0:                
+                self.__inductance = value * self.get_vscale()
+            else:
+                self.__inductance = 0.0
+                raise Exception
+        except Exception:
+            print(self.ERR_STATEMENT)
+    
+    def set_ZL(self, value, vscl, freq, fscl):
+        # set the value of the lumped element inductor complex impedance
         try:
             self.set_vscale(vscl)
             self.set_f(freq, fscl)
             if value >= 0.0 and self.get_w() > 0.0:                
-                self.__inductance = complex(0.0, self.get_w() * value * self.get_vscale())
+                self.__ZL = complex(0.0, self.get_w() * value * self.get_vscale())
             else:
-                self.__inductance = complex(0.0, 0.0)
+                self.__ZL = complex(0.0, 0.0)
                 raise Exception
         except Exception:
             print(self.ERR_STATEMENT)
