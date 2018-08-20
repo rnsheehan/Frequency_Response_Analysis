@@ -116,7 +116,7 @@ class capacitor(impedance):
     # capacitor is derived from base class impedance
     # capacitor contains private member __capacitance
 
-    def __init__(self, cval, vscl, fval, fscl):
+    def __init__(self, cval, vscl, fval = 1.0, fscl =1.0):
         self.FUNC_NAME = ".capacitor(impedance)" # use this in exception handling messages
         
         self.ERR_STATEMENT = "Error: " + MOD_NAME_STR + self.FUNC_NAME  
@@ -166,7 +166,7 @@ class inductor(impedance):
     # inductor is derived from base class impedance
     # inductor contains private member __inductance
 
-    def __init__(self, ival, vscl, fval, fscl):
+    def __init__(self, ival, vscl, fval = 1.0, fscl = 1.0):
         self.FUNC_NAME = ".inductor(impedance)" # use this in exception handling messages
         
         self.ERR_STATEMENT = "Error: " + MOD_NAME_STR + self.FUNC_NAME  

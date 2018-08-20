@@ -52,3 +52,50 @@ def RC_voltage_divider(rval, rscl, cval, cscl, fval, fscl):
             raise Exception
     except Exception:
         print(ERR_STATEMENT)
+
+def RC_BW(rval, rscl, cval, cscl):
+    # compute the 3-dB BW of the RC circuit
+    # R. Sheehan 20 - 8 - 2018
+
+    FUNC_NAME = ".RC_BW()" # use this in exception handling messages        
+    ERR_STATEMENT = "Error: " + MOD_NAME_STR + FUNC_NAME
+
+    try:
+        c1 = True if rval > 0.0 else False
+        c2 = Common.dict_contains_value(Common.SI_Prefices, rscl)
+        c3 = True if cval > 0.0 else False
+        c4 = Common.dict_contains_value(Common.SI_Prefices, cscl)
+        c7 = True if c1 and c2 and c3 and c4 else False
+
+        if c7:
+            R = Impedance.resistor(rval, rscl)
+            C = Impedance.capacitor(cval, cscl)
+            
+            return math.sqrt(3) / ( Common.TWO_PI * R.get_R() * C.get_C() )
+        else:
+            raise Exception
+    except Exception:
+        print(ERR_STATEMENT)
+
+def RC_Response(rval, rscl, cval, cscl, fval, fscl):
+
+    # Generate a plot of the RC circuit response
+
+    FUNC_NAME = ".RC_Response()" # use this in exception handling messages        
+    ERR_STATEMENT = "Error: " + MOD_NAME_STR + FUNC_NAME
+
+    try:
+        c1 = True if rval > 0.0 else False
+        c2 = Common.dict_contains_value(Common.SI_Prefices, rscl)
+        c3 = True if cval > 0.0 else False
+        c4 = Common.dict_contains_value(Common.SI_Prefices, cscl)
+        c5 = True if fval > 0.0 else False
+        c6 = Common.dict_contains_value(Common.SI_Prefices, fscl)
+        c7 = True if c1 and c2 and c3 and c4 and c5 and c6 else False
+
+        if c7:
+            pass
+        else:
+            raise Exception
+    except Exception:
+        print(ERR_STATEMENT)
